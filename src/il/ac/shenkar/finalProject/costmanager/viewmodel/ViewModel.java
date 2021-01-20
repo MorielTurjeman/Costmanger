@@ -68,4 +68,23 @@ public class ViewModel implements IViewModel {
             }
         });
     }
+
+    @Override
+    public void getCategories() {
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                Vector<Category> res= null;
+                try {
+                    res = model.getCategories();
+                } catch (CostManagerException e) {
+                    e.printStackTrace();
+                }
+                view.showCategories(res);
+            }
+
+        });
+    }
 }
+
+

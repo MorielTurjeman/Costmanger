@@ -5,12 +5,15 @@ import il.ac.shenkar.finalProject.costmanager.model.CostItem;
 import il.ac.shenkar.finalProject.costmanager.model.IModel;
 import il.ac.shenkar.finalProject.costmanager.view.IView;
 
+import java.util.Vector;
+
 public interface IViewModel {
 
     public void setView(IView view);
     public void setModel(IModel model);
     public void addCostItem(CostItem item);
     public  void addCategory(Category newCategory);
+    public void getCategories();
 
 
 
