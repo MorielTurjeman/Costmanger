@@ -10,5 +10,15 @@
     <orderEntry type="library" name="derby (2)" level="project" />
     <orderEntry type="library" name="derbyshared (2)" level="project" />
     <orderEntry type="library" name="derbytools (2)" level="project" />
+    <orderEntry type="library" name="derby" level="project" />
+    <orderEntry type="library" name="derbyshared" level="project" />
+    <orderEntry type="library" name="derbytools" level="project" />
+    <orderEntry type="library" name="derby" level="project" />
+    <orderEntry type="library" name="derbyshared" level="project" />
+    <orderEntry type="library" name="derbytools" level="project" />
+    <orderEntry type="library" name="derby" level="project" />
+    <orderEntry type="library" name="derbyshared" level="project" />
+    <orderEntry type="library" name="derbytools" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
