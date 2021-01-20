@@ -6,5 +6,8 @@ public interface IModel {
     public void addCostItem(CostItem item) throws CostManagerException;
     public Vector<CostItem> getCostItems() throws CostManagerException;
     public void deleteCostItem(CostItem item) throws CostManagerException;
+    public  void  addCategory(Category newCategory) throws CostManagerException;
+    public Vector<Category> getCategories() throws CostManagerException;
+
     //..
 }

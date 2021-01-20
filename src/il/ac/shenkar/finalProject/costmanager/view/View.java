@@ -1,5 +1,6 @@
 package il.ac.shenkar.finalProject.costmanager.view;
 
+import il.ac.shenkar.finalProject.costmanager.model.Category;
 import il.ac.shenkar.finalProject.costmanager.model.CostItem;
 import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
 import il.ac.shenkar.finalProject.costmanager.model.Currency;
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Line2D;
 import java.time.Month;
+import java.util.Vector;
 
 public class View implements IView {
 
@@ -32,6 +34,12 @@ public class View implements IView {
     public void showItems(CostItem[] vec) {
         ui.showItems(vec);
     }
+
+    @Override
+    public void showCategories(Vector<Category> categoryVec) {
+        ui.updateCategoryList(categoryVec);
+    }
+
 
     public View() {
         SwingUtilities.invokeLater(new Runnable() {
@@ -131,6 +139,18 @@ public class View implements IView {
             //middle
             mtf = new JTextField(8);
             mbtn  = new JButton("Add Category");
+            mbtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    String newCategory= mtf.getText();
+                    if (newCategory.isEmpty()){
+                        ui.showMessage("Category name empty");
+                    }
+                    else
+                    vm.addCategory(new Category(newCategory));
+
+                }
+            });
 
             //table
             String column[]={"ID","Date","Category", "Description", "Cost", "Currency"};
@@ -309,6 +329,7 @@ public class View implements IView {
             //}
         }
 
+        //Show the costItems at the table
         public void showItems(CostItem[] items) {
             StringBuilder sb = new StringBuilder();
             for(CostItem item : items) {
@@ -330,9 +351,10 @@ public class View implements IView {
             }
         }
 
-        public void tableMouseClick(MouseEvent e)
+        public void updateCategoryList(Vector<Category> categories)
         {
-
+            ComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<>(categories);
+            categoryList.setModel(categoriesModel);
         }
 
         public void tableSelectionChanged() {
@@ -351,5 +373,11 @@ public class View implements IView {
             ReportPopup rp = new ReportPopup();
             rp.showDialog();
         }
+
+        public  void addCategory(String categoryName){
+
+
+        }
+
     }
 }

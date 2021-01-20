@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.Month;
 
-public class ReportPopup implements IView{
+public class ReportPopup {
     private IViewModel vm;
     private  JLabel from;
     private  JLabel to;
@@ -94,18 +94,5 @@ public class ReportPopup implements IView{
 
 
 
-    @Override
-    public void setViewModel(IViewModel vm) {
-        this.vm= vm;
-    }
 
-    @Override
-    public void showMessage(String text) {
-
-    }
-
-    @Override
-    public void showItems(CostItem[] vec) {
-
-    }
 }

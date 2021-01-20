@@ -9,11 +9,8 @@ import java.util.Vector;
 public class CostItemDemo {
     public static void main(String args[])  {
         Category c = null;
-        try {
             c = new Category("hi");
-        } catch (CostManagerException e) {
-            e.printStackTrace();
-        }
+
         // Category d = new Category("hi2");
         CostItem item = new CostItem("nice carpet",990,Currency.USD,c);
         CostItem item2 = new CostItem("nice carpet",990,Currency.USD,c);

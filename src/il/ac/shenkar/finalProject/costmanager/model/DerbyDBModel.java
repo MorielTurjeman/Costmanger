@@ -13,7 +13,7 @@ public class DerbyDBModel implements IModel {
         try {
             Connection connection = DriverManager.getConnection(jdbcURL);
             String sql = String.format("Insert into costItem (description,sumPrice,currency,category, timestamp) values ( '%s', %f, '%s', '%s', '%s')",
-                    item.getDescription(), item.getSum(), item.getCurrency().toString(), item.getCategory().getCategory(), new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").format(item.getDate()));
+                    item.getDescription(), item.getSum(), item.getCurrency().toString(), item.getCategory().getCategory(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getDate()));
             Statement statement = connection.createStatement();
             int rows = statement.executeUpdate(sql);
             if(rows>0) {
@@ -32,6 +32,45 @@ public class DerbyDBModel implements IModel {
         }
 
     }
+
+    @Override
+    public void addCategory(Category newCategory) throws CostManagerException {
+        String jdbcURL= "jdbc:derby:costManager;create=true";
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(jdbcURL);
+
+        String sql=String.format("Insert into categories (NAME) values ('%s')", newCategory.getCategory());
+        Statement statement = connection.createStatement();
+        int rows = statement.executeUpdate(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+    public Vector<Category> getCategories() throws CostManagerException {
+        Vector<Category> categories =new Vector<>();
+        String jdbcURL= "jdbc:derby:costManager;create=true";
+        Connection connection= null;
+        try {
+            connection = DriverManager.getConnection(jdbcURL);
+
+            String sql= "Select NAME from  Categories";
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery(sql);
+            while (set.next()){
+
+                String name= set.getString("NAME");
+                Category newCategory= new Category(name);
+                categories.add(newCategory);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return categories;
+
+    }
+
 
     @Override
     public Vector<CostItem> getCostItems() throws CostManagerException {
@@ -97,16 +136,19 @@ public class DerbyDBModel implements IModel {
     }
 
 
+
     public DerbyDBModel(){
         String jdbcURL= "jdbc:derby:costManager;create=true";
         try {
-        Connection connection = DriverManager.getConnection(jdbcURL);
-        String ceateTable = "CREATE TABLE costItem (id int not null,description varchar(255)," +
+            Connection connection = DriverManager.getConnection(jdbcURL);
+            String createTable = "CREATE TABLE costItem (id int not null,description varchar(255)," +
                 "sumPrice double," +
                 "currency varchar(255) not null," +
                 "category varchar(255) not null)";
             Statement statement = connection.createStatement();
-            statement.executeUpdate(ceateTable);
+            statement.executeUpdate(createTable);
+
+
         } catch (SQLException throwables) {
             if(throwables.getSQLState().equals("X0Y32")) {
                 System.out.println("Table costItem already exists!");
@@ -117,4 +159,5 @@ public class DerbyDBModel implements IModel {
 
     }
     //...
+
 }

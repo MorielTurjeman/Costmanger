@@ -1,10 +1,12 @@
 package il.ac.shenkar.finalProject.costmanager.viewmodel;
 
+import il.ac.shenkar.finalProject.costmanager.model.Category;
 import il.ac.shenkar.finalProject.costmanager.model.CostItem;
 import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
 import il.ac.shenkar.finalProject.costmanager.model.IModel;
 import il.ac.shenkar.finalProject.costmanager.view.IView;
 
+import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,5 +46,26 @@ public class ViewModel implements IViewModel {
             }
         });
 
+    }
+
+    @Override
+    public void addCategory(Category newCategory) {
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    model.addCategory(newCategory);
+                    view.showMessage(String.format("Category %s added succesfully", newCategory.getCategory()));
+                    Vector <Category> items= model.getCategories();
+                    view.showCategories(items);
+
+                }
+                catch (CostManagerException e)
+                {
+                    view.showMessage(e.getMessage());
+                }
+
+            }
+        });
     }
 }
