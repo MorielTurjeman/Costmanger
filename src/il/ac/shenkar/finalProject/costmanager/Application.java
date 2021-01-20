@@ -9,7 +9,7 @@ import il.ac.shenkar.finalProject.costmanager.viewmodel.ViewModel;
 
 public class Application {
     public static void main(String args[]) {
-
+        //hii
 
         //creating the application components
         IModel model = new DerbyDBModel();
