@@ -1,11 +1,15 @@
 package il.ac.shenkar.finalProject.costmanager.view;
 
+import il.ac.shenkar.finalProject.costmanager.model.Category;
 import il.ac.shenkar.finalProject.costmanager.model.CostItem;
+import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
+import il.ac.shenkar.finalProject.costmanager.model.Currency;
 import il.ac.shenkar.finalProject.costmanager.viewmodel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.Month;
+import java.util.ArrayList;
 
 public class ReportPopup implements IView{
     private IViewModel vm;
@@ -58,6 +62,10 @@ public class ReportPopup implements IView{
         String[] categories={"All","SuperMarket", "Education", "Taxes", "Communication", "Transportation"};
         categoryList= new JComboBox(categories);
 
+
+        getChartPie.addActionListener(l -> this.showPie());
+
+
     }
 
 
@@ -90,8 +98,49 @@ public class ReportPopup implements IView{
 
 
 
+
+
     }
 
+    public void showPie(){
+        SwingUtilities.invokeLater(() -> {
+            //1
+            PieChart example = new PieChart("hii");
+
+
+            /* 2 -> data*/
+
+            ArrayList<Category> categoryList = new ArrayList<Category>();
+            ArrayList<CostItem> costItems = new ArrayList<CostItem>();
+            try {
+                Category a = new Category("a");
+                Category b = new Category("b");
+                categoryList.add(a);
+                categoryList.add(b);
+                CostItem item = new CostItem("nice1",9, Currency.USD,a);
+                CostItem item2 = new CostItem("nice2",9000,Currency.USD,b);
+                CostItem item3 = new CostItem("nice carpet3",99000,Currency.USD,a);
+                CostItem item4 = new CostItem("nice carpet4",990,Currency.USD,b);
+                costItems.add(item);
+                costItems.add(item2);
+                costItems.add(item3);
+                costItems.add(item4);
+            } catch (CostManagerException e) {
+                e.printStackTrace();
+            }
+
+            //3 -> set data
+            example.setCategoryList(categoryList);
+            example.setItems(costItems);
+
+            //4 -> show pie chart
+            example.showPieChart();
+            example.setSize(800, 400);
+            example.setLocationRelativeTo(null);
+            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            example.setVisible(true);
+        });
+    }
 
 
     @Override
