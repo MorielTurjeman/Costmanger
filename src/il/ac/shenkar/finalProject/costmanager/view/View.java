@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.Month;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 public class View implements IView {
@@ -275,6 +277,11 @@ public class View implements IView {
                         if(description==null || description.length()==0) {
                             throw new CostManagerException("description cannot be empty");
                         }
+                        Month selectedMonth= (Month) month.getSelectedItem();
+                        Integer selectedDay= (Integer) day.getSelectedItem();
+                        Integer selectedYear= (Integer) year.getSelectedItem();
+                        Date selectedDate= new Date(selectedYear - 1900, selectedMonth.getValue() - 1, selectedDay);
+                        Category selectedCategory= (Category) categoryList.getSelectedItem();
                         double sum = Double.parseDouble(tfItemSum.getText());
                         String currencyStr = tfItemCurrency.getSelectedItem().toString();
                         Currency currency = null;
@@ -290,8 +297,8 @@ public class View implements IView {
                                 currency = Currency.USD;
 
                         }
-                        //CostItem item = new CostItem(description, sum, currency);
-                        //vm.addCostItem(item);
+                        CostItem item = new CostItem(description, sum, currency, selectedCategory, selectedDate);
+                        vm.addCostItem(item);
 
 
                     } catch (NumberFormatException ex) {

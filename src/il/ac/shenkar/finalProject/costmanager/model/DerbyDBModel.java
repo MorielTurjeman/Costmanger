@@ -45,6 +45,7 @@ public class DerbyDBModel implements IModel {
         int rows = statement.executeUpdate(sql);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw new CostManagerException(throwables.getMessage());
         }
 
     }

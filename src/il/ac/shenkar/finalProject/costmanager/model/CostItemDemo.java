@@ -12,19 +12,19 @@ public class CostItemDemo {
             c = new Category("hi");
 
         // Category d = new Category("hi2");
-        CostItem item = new CostItem("nice carpet",990,Currency.USD,c);
-        CostItem item2 = new CostItem("nice carpet",990,Currency.USD,c);
-        CostItem item3 = new CostItem("nice carpet",990,Currency.USD,c);
-        CostItem item4 = new CostItem("nice carpet",990,Currency.USD,c);
+        //CostItem item = new CostItem("nice carpet",990,Currency.USD,c);
+        //CostItem item2 = new CostItem("nice carpet",990,Currency.USD,c);
+        //CostItem item3 = new CostItem("nice carpet",990,Currency.USD,c);
+        //CostItem item4 = new CostItem("nice carpet",990,Currency.USD,c);
      /*   System.out.println(item);
         System.out.println(item2);
         System.out.println(item3);
         System.out.println(item4);
 
       */
-        DerbyDBModel ddb = new DerbyDBModel();
+        /*DerbyDBModel ddb = new DerbyDBModel();
         try {
-            ddb.addCostItem(item);
+            //ddb.addCostItem(item);
             ddb.addCostItem(item2);
             ddb.addCostItem(item3);
             ddb.addCostItem(item4);
@@ -41,7 +41,7 @@ public class CostItemDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+*/
 
     }
 }

@@ -3,6 +3,7 @@ package il.ac.shenkar.finalProject.costmanager.view;
 import il.ac.shenkar.finalProject.costmanager.model.CostItem;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class CostItemTableModel extends AbstractTableModel {
@@ -33,7 +34,7 @@ public class CostItemTableModel extends AbstractTableModel {
             case 0:
                 return costItem.getId();
             case 1:
-                return costItem.getDate();
+                return new SimpleDateFormat("yyyy-MM-dd").format(costItem.getDate());
             case 2:
                 return costItem.getCategory();
             case 3:
