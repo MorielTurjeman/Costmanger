@@ -14,6 +14,7 @@ public interface IViewModel {
     public void addCostItem(CostItem item);
     public  void addCategory(Category newCategory);
     public void getCategories();
+    public void getCostItems();
 
 
 

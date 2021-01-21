@@ -105,22 +105,20 @@ public class PieChart extends JFrame {
 
             ArrayList<Category> categoryList = new ArrayList<Category>();
             ArrayList<CostItem> costItems = new ArrayList<CostItem>();
-            try {
-                Category a = new Category("a");
-                Category b = new Category("b");
-                categoryList.add(a);
-                categoryList.add(b);
-                CostItem item = new CostItem("nice1",90, Currency.USD,a);
-                CostItem item2 = new CostItem("nice2",990,Currency.USD,b);
-                CostItem item3 = new CostItem("nice carpet3",990,Currency.USD,a);
-                CostItem item4 = new CostItem("nice carpet4",990,Currency.USD,b);
-                costItems.add(item);
-                costItems.add(item2);
-                costItems.add(item3);
-                costItems.add(item4);
-            } catch (CostManagerException e) {
-                e.printStackTrace();
-            }
+
+            Category a = new Category("a");
+            Category b = new Category("b");
+            categoryList.add(a);
+            categoryList.add(b);
+            CostItem item = new CostItem("nice1",90, Currency.USD,a);
+            CostItem item2 = new CostItem("nice2",990,Currency.USD,b);
+            CostItem item3 = new CostItem("nice carpet3",990,Currency.USD,a);
+            CostItem item4 = new CostItem("nice carpet4",990,Currency.USD,b);
+            costItems.add(item);
+            costItems.add(item2);
+            costItems.add(item3);
+            costItems.add(item4);
+
 
             //3 -> set data
             example.setCategoryList(categoryList);

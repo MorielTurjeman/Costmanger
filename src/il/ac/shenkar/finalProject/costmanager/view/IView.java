@@ -11,7 +11,7 @@ public interface IView {
     //public void displayPieChart(Map map);
     public void setViewModel(IViewModel vm);
     public void showMessage(String text);
-    public void showItems(CostItem[] vec);
+    public void showItems(Vector<CostItem> costItems);
     public void showCategories(Vector<Category> categoryVec);
     //..
 }

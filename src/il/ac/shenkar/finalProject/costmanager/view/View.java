@@ -6,12 +6,11 @@ import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
 import il.ac.shenkar.finalProject.costmanager.model.Currency;
 import il.ac.shenkar.finalProject.costmanager.viewmodel.IViewModel;
 
-import javax.sound.sampled.Line;
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Line2D;
 import java.time.Month;
 import java.util.Vector;
 
@@ -31,8 +30,8 @@ public class View implements IView {
     }
 
     @Override
-    public void showItems(CostItem[] vec) {
-        ui.showItems(vec);
+    public void showItems(Vector<CostItem> costItems) {
+        ui.showItems(costItems);
     }
 
     @Override
@@ -115,10 +114,9 @@ public class View implements IView {
             lbMessage = new JLabel("Message: ");
             tfMessage = new JTextField(30);
             categoryLable= new JLabel("Category: ");
-            String[] categories={" ","SuperMarket", "Education", "Taxes", "Communication", "Transportation"};
             purchaseDate= new JLabel("Purchase Date: ");
 
-            categoryList= new JComboBox(categories);
+            categoryList= new JComboBox();
 
             Month[] months = { Month.of(1), Month.of(2), Month.of(3), Month.of(4), Month.of(5), Month.of(6),  Month.of(7), Month.of(8), Month.of(9), Month.of(10), Month.of(11), Month.of(12)};
             month = new JComboBox(months);
@@ -153,11 +151,7 @@ public class View implements IView {
             });
 
             //table
-            String column[]={"ID","Date","Category", "Description", "Cost", "Currency"};
-            DefaultTableModel dtm = new DefaultTableModel(column, 50);
-
-
-            table =new JTable(dtm);
+            table =new JTable();
             table.setRowSelectionAllowed(true);
             table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             //table.getSelectionModel().addListSelectionListener(s );
@@ -180,6 +174,8 @@ public class View implements IView {
             });
             deleteButton= new JButton("Delete Selected");
 
+            vm.getCategories();
+            vm.getCostItems();
 
 
         }
@@ -323,38 +319,21 @@ public class View implements IView {
                 });
 
             }
-            //@Override
-            //public void setViewModel(IViewModel vm) {
-            //
-            //}
+
         }
 
         //Show the costItems at the table
-        public void showItems(CostItem[] items) {
-            StringBuilder sb = new StringBuilder();
-            for(CostItem item : items) {
-                sb.append(item.toString());
-                sb.append("\n");
-            }
-            String text = sb.toString();
+        public void showItems(Vector <CostItem> items) {
+            CostItemTableModel costItemTable= new CostItemTableModel(items);
+            table.setModel(costItemTable);
 
-            if (SwingUtilities.isEventDispatchThread()) {
-                textArea.setText(text);
-            } else {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        textArea.setText(text);
-                    }
-                });
-
-            }
         }
 
         public void updateCategoryList(Vector<Category> categories)
         {
             ComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<>(categories);
             categoryList.setModel(categoriesModel);
+
         }
 
         public void tableSelectionChanged() {

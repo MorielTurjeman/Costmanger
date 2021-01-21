@@ -38,7 +38,7 @@ public class ViewModel implements IViewModel {
                 try {
                     model.addCostItem(item);
                     view.showMessage("cost item was added successfully");
-                    CostItem[] items = (CostItem[]) model.getCostItems().toArray();
+                    Vector<CostItem> items = model.getCostItems();
                     view.showItems(items);
                 } catch(CostManagerException e) {
                     view.showMessage(e.getMessage());
@@ -85,6 +85,27 @@ public class ViewModel implements IViewModel {
 
         });
     }
+
+    @Override
+    public void getCostItems() {
+        pool.submit((new Runnable() {
+            @Override
+            public void run() {
+                Vector <CostItem> costItems= null;
+                try {
+                    costItems = model.getCostItems();
+                    view.showItems(costItems);
+
+                } catch (CostManagerException e) {
+                    e.printStackTrace();
+                    view.showMessage(e.getMessage());
+                }
+
+            }
+        }));
+
+    }
+
 }
 
 
