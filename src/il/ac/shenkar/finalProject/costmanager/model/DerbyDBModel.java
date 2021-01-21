@@ -1,7 +1,6 @@
 package il.ac.shenkar.finalProject.costmanager.model;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -113,11 +112,11 @@ public class DerbyDBModel implements IModel {
     }
 
     @Override
-    public void deleteCostItem(CostItem item) throws CostManagerException {
+    public void deleteCostItem(int id) throws CostManagerException {
         String jdbcURL= "jdbc:derby:costManager;create=true";
         try {
             Connection connection = DriverManager.getConnection(jdbcURL);
-            String sql ="DELETE FROM costItem WHERE id = "+item.getId();
+            String sql ="DELETE FROM costItem WHERE id = "+ id;
             Statement statement = connection.createStatement();
             int rows = statement.executeUpdate(sql);
             if(rows>0) {

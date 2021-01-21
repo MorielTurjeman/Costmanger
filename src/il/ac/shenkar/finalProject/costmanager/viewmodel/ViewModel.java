@@ -106,6 +106,26 @@ public class ViewModel implements IViewModel {
 
     }
 
+    @Override
+    public void deleteCostItem(int id) {
+        pool.submit((new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    model.deleteCostItem(id);
+
+                    Vector<CostItem> costItems = model.getCostItems();
+                    view.showItems(costItems);
+
+                } catch (CostManagerException e) {
+                    e.printStackTrace();
+                    view.showMessage(e.getMessage());
+                }
+            }
+        }));
+
+    }
+
 }
 
 

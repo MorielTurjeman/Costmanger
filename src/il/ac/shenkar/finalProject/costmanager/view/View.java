@@ -77,7 +77,8 @@ public class View implements IView {
 
         private  JButton getReport;
         private JTable table;
-        private  JButton deleteButton; private  JLabel purchaseDate;
+        private  JButton deleteButton;
+        private  JLabel purchaseDate;
         private  JComboBox month;
         private  JComboBox day;
         private  JComboBox year;
@@ -175,6 +176,15 @@ public class View implements IView {
                 }
             });
             deleteButton= new JButton("Delete Selected");
+            deleteButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    int row=table.getSelectedRow();
+                    int id= (Integer)table.getModel().getValueAt(row, 0);
+                    vm.deleteCostItem(id);
+
+                }
+            });
 
             vm.getCategories();
             vm.getCostItems();
