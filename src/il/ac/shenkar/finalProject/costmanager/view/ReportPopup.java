@@ -12,7 +12,12 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Creates a ReportPopup class
+ * The report popup allows the user the create a ReportFilter object used to filter the main report
+ */
 public class ReportPopup {
+
     private IViewModel vm;
     private  JLabel from;
     private  JLabel to;
@@ -31,8 +36,9 @@ public class ReportPopup {
     private ReportFilters rf;
 
 
-
-
+    /**
+     * Class Constructor
+     */
     public ReportPopup(){
         panel = new JPanel();
         from= new JLabel("From: ");
@@ -68,13 +74,20 @@ public class ReportPopup {
 
     }
 
-
+    /**
+     *
+     * @return the ReportFilters object matching the filters selected in the popup
+     */
     public ReportFilters returnReportFilters()  {
 
         return rf;
     }
 
-    public void ClosePopup(JDialog dialog) {
+    /**
+     * Read the variables from the controls and construct a ReportFilters object
+     * @param dialog The JDialog object to be closed.
+     */
+    private void ClosePopup(JDialog dialog) {
         SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
         Date from = null;
         try {
@@ -91,7 +104,9 @@ public class ReportPopup {
     }
 
 
-
+    /**
+     * Show the report popup to the user.
+     */
     public void showDialog()
     {
         JDialog dialog = new JDialog(fr, "Reports");
@@ -102,6 +117,9 @@ public class ReportPopup {
         int left = 10;
         int bottom = 00;
         int right = 00;
+        /**
+         * Sets the 'padding' between items
+         */
         c.insets = new Insets(top, left, bottom, right);
         c.anchor = GridBagConstraints.BASELINE_LEADING;
 
