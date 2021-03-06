@@ -64,7 +64,6 @@ public class ReportPopup {
         categoryList= new JComboBox(categories);
 
 
-        getChartPie.addActionListener(l -> this.showPie());
 
     }
 
@@ -97,7 +96,6 @@ public class ReportPopup {
         panel.add(categoryLable);
         panel.add(categoryList);
         panel.add(getReport);
-        panel.add(getChartPie);
 
         getReport.addActionListener(l -> dialog.setVisible(false));
 
@@ -114,42 +112,7 @@ public class ReportPopup {
 
     }
 
-    public void showPie(){
-        SwingUtilities.invokeLater(() -> {
-            //1
-            PieChart example = new PieChart("PieChart Report");
 
-
-            /* 2 -> data*/
-
-            ArrayList<Category> categoryList = new ArrayList<Category>();
-            ArrayList<CostItem> costItems = new ArrayList<CostItem>();
-            Category a = new Category("a");
-            Category b = new Category("b");
-            categoryList.add(a);
-            categoryList.add(b);
-            CostItem item = new CostItem("nice1",9, Currency.USD,a);
-            CostItem item2 = new CostItem("nice2",9000,Currency.USD,b);
-            CostItem item3 = new CostItem("nice carpet3",99000,Currency.USD,a);
-            CostItem item4 = new CostItem("nice carpet4",990,Currency.USD,b);
-            costItems.add(item);
-            costItems.add(item2);
-            costItems.add(item3);
-            costItems.add(item4);
-
-
-            //3 -> set data
-            example.setCategoryList(categoryList);
-            example.setItems(costItems);
-
-            //4 -> show pie chart
-            example.showPieChart();
-            example.setSize(800, 400);
-            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            example.setVisible(true);
-        });
-    }
 
 
 
