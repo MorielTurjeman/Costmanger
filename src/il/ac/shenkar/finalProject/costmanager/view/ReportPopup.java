@@ -45,7 +45,7 @@ public class ReportPopup {
     /**
      * Class Constructor
      */
-    public ReportPopup(){
+    public ReportPopup(ComboBoxModel<Category> categoryComboBoxModel){
         panel = new JPanel();
         from= new JLabel("From: ");
         to= new JLabel("To: ");
@@ -73,8 +73,12 @@ public class ReportPopup {
         getReport.setBackground(Color.decode("#05c880"));
         getChartPie.setBackground(Color.decode("#05c880"));
         categoryLable= new JLabel("Category: ");
-        String[] categories={"All","SuperMarket", "Education", "Taxes", "Communication", "Transportation"};
-        categoryList= new JComboBox(categories);
+
+        categoryList = new JComboBox();
+        categoryList.addItem("All");
+        categoryList.setSelectedItem("All");
+        for (int i = 0; i < categoryComboBoxModel.getSize(); i++)
+            categoryList.addItem(categoryComboBoxModel.getElementAt(i));
 
 
 

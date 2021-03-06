@@ -434,7 +434,7 @@ public class View implements IView
 
         public void showReportDialog()
         {
-            ReportPopup rp = new ReportPopup();
+            ReportPopup rp = new ReportPopup(this.categoryList.getModel());
             rp.showDialog();
             try {
                 ReportFilters rf = rp.returnReportFilters();
