@@ -8,7 +8,11 @@ import il.ac.shenkar.finalProject.costmanager.view.View;
 import il.ac.shenkar.finalProject.costmanager.viewmodel.IViewModel;
 import il.ac.shenkar.finalProject.costmanager.viewmodel.ViewModel;
 
-public class Application {
+public class Application
+/**
+ * The purpose of this class is to create the different components of the application and then connect them to one another.
+ * */
+{
     public static void main(String args[]) {
         //creating the application components
         IModel model = new DerbyDBModel();

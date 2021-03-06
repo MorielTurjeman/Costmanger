@@ -2,7 +2,11 @@ package il.ac.shenkar.finalProject;
 
 import java.util.ArrayList;
 
-public class CategoryList {
+public class CategoryList
+/**
+ * A list of categories that already exist.
+ * */
+{
 
     private static ArrayList<String> categoryList = new ArrayList<String>();
 
