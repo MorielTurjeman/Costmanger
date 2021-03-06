@@ -16,7 +16,11 @@ public class CostItem /**
     private Category category;
     private Date date;
 
-    public CostItem(String description, double sum,Currency currency, Category category, Date date) {
+    public CostItem(String description, double sum,Currency currency, Category category, Date date)
+    /**
+     * Initializes the CostItem. Receives a String, double, Currency, Category, Date. Returns nothing.
+     * */
+    {
 //        this.description = description;
 //        this.sum = sum;
 //        this.currency = currency;
@@ -31,12 +35,20 @@ public class CostItem /**
         setDate(date);
     }
 
-    public CostItem(int id,String description, double sum,Currency currency, Category category, Date date){
+    public CostItem(int id,String description, double sum,Currency currency, Category category, Date date)
+    /***
+     * Initializes the CostItem. Receives int, String, double, Currency, Category, Date. Returns nothing.
+     */
+    {
         this(description, sum, currency, category, date);
         this.id= id;
     }
 
-    public CostItem(String description, double sum,Currency currency, Category category){
+    public CostItem(String description, double sum,Currency currency, Category category)
+    /***
+     * Initializes the CostItem. Receives a String, double, Currency, Category. Returns nothing.
+     */
+    {
         this(description, sum, currency, category, new Date());
 
     }
@@ -58,41 +70,85 @@ public class CostItem /**
 
     }
 
-    public int getId(){
+    public int getId()
+    /***
+     * Get the Id of the item. Receives nothing, returns an int.
+     */
+    {
         return this.id;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    /***
+     * Get the description of the item. Receives nothing, returns a String.
+     */
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    /***
+     * Set the description of the item. Receives a String, returns nothing.
+     */
+    {
         this.description = description;
     }
 
-    public double getSum() {
+    public double getSum()
+    /***
+     * Get the sum of the item. Receives nothing, returns a double.
+     */
+    {
         return sum;
     }
 
-    public void setSum(double sum) {
+    public void setSum(double sum)
+    /***
+     * Set the sum of the item. Receives a double, returns nothing.
+     */
+    {
         this.sum = sum;
     }
 
-    public Currency getCurrency() {
+    public Currency getCurrency()
+    /***
+     * Get the currency of the item. Recieves nothing, returns a Currency.
+     */
+    {
        return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(Currency currency)
+    /***
+     * Set the currency of the item. Receives a Currency, returns nothing.
+     */
+    {
         this.currency = currency;
     }
 
-    public Category getCategory(){
+    public Category getCategory()
+    /***
+     * Get the category of the item. Receives nothing, returns a Category.
+     */
+    {
         return this.category;
     }
 
-    public void setDate(Date date){this.date= date; }
+    public void setDate(Date date)
+    /***
+     * Set the date of the item. Receives a Date, returns nothing.
+     */
+    {
+        this.date= date;
+    }
 
-    public  Date getDate() {return this.date;}
+    public  Date getDate()
+    /***
+     * Get the date of the item. Receives nothing, returns a Date.
+     */
+    {
+        return this.date;
+    }
 
 }
 

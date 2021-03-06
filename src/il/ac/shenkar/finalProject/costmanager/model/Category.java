@@ -10,17 +10,29 @@ public class Category /**
 
      private String category;
 
-    public Category(String category)  {
+    public Category(String category)
+    /***
+     * Initialize the Category. Receives a String, returns nothing.
+     */
+    {
          this.category= category;
     }
 
 
-    public String getCategory(){
+    public String getCategory()
+    /***
+     * Get the Category. Receives nothing, returns a String.
+     */
+    {
         return this.category;
      }
 
     @Override
-    public String toString() {
+    public String toString()
+    /***
+     * Returns the Category as a String.
+     */
+    {
         return category;
     }
 }

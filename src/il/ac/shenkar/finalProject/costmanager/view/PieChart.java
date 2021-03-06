@@ -25,7 +25,11 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
 
-public class PieChart extends JFrame {
+public class PieChart extends JFrame
+/**
+ * Pie Chart to display to the user of his past purchases.
+ * */
+{
     private static final long serialVersionUID = 6294689542092367723L;
     ArrayList<Category> categoryList = new ArrayList<Category>();
     ArrayList<CostItem> items = new ArrayList<CostItem>();
@@ -36,17 +40,35 @@ public class PieChart extends JFrame {
 
     }
 
-    public void setCategoryList(ArrayList<Category> categoryList) {
+    public void setCategoryList(ArrayList<Category> categoryList)
+    /**
+     * Set the category list. Receives an ArrayList<Category>, returns nothing.
+     * */
+    {
         this.categoryList = categoryList;
     }
 
-    public void setItems(ArrayList<CostItem> items) {
+    public void setItems(ArrayList<CostItem> items)
+    /**
+     * Set the items. Receives an ArrayList<CostItem>, returns nothing
+     * */
+    {
         this.items = items;
     }
 
-    public  void setData(HashMap<Category, Double> pieChartData) {this.pieChartData= pieChartData;}
+    public  void setData(HashMap<Category, Double> pieChartData)
+    /**
+     * Set the data. Receives a HashMap<Category, Double>, returns nothing.
+     * */
+    {
+        this.pieChartData= pieChartData;
+    }
 
-    public void showPieChart(){
+    public void showPieChart()
+    /**
+     * Display the pie chart.
+     * */
+    {
         // Create dataset   change
         PieDataset dataset = createDataset();
 

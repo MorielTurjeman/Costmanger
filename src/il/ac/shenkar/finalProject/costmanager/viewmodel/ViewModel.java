@@ -7,7 +7,11 @@ import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ViewModel implements IViewModel {
+public class ViewModel implements IViewModel
+        /**
+         * The ViewModel of the application.
+         * */
+{
 
     private IModel model;
     private IView view;

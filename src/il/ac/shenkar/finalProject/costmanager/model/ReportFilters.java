@@ -1,10 +1,12 @@
 package il.ac.shenkar.finalProject.costmanager.model;
 import java.util.Date;
 
+
+public class ReportFilters
 /**
- * The ReportFilters class details the filters required for the main report
+ * The ReportFilters class details the filters required for the main report.
  */
-public class ReportFilters {
+{
     Date from;
     Date to;
     Category category;
@@ -16,6 +18,9 @@ public class ReportFilters {
      * @param category Selected Category
      */
     public ReportFilters(Date from, Date to, Category category)
+    /***
+     * Initialize filters. Receives two Dates and one Category.
+     */
     {
         this.from = from;
         this.to = to;
@@ -23,15 +28,27 @@ public class ReportFilters {
     }
 
 
-    public Category getCategory() {
+    public Category getCategory()
+    /***
+     * Get the category. Receives nothing, returns a Category.
+     */
+    {
         return category;
     }
 
-    public Date getFrom() {
+    public Date getFrom()
+    /***
+     * Get the "from-date". Receives nothing, returns a Date.
+     */
+    {
         return from;
     }
 
-    public Date getTo() {
+    public Date getTo()
+    /***
+     * Get the "to-date". Receives nothing, returns a Date.
+     */
+    {
         return to;
     }
 }

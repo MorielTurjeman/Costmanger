@@ -14,7 +14,11 @@ import java.text.ParseException;
 import java.time.Month;
 import java.util.*;
 
-public class View implements IView {
+public class View implements IView
+/**
+ * The view of the application.
+ * */
+{
 
     private IViewModel vm;
     private ApplicationUI ui;
