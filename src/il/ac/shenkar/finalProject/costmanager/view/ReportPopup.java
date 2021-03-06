@@ -44,6 +44,7 @@ public class ReportPopup {
 
     /**
      * Class Constructor
+     * @param categoryComboBoxModel The current list of categories
      */
     public ReportPopup(ComboBoxModel<Category> categoryComboBoxModel){
         panel = new JPanel();
