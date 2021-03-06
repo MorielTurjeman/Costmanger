@@ -26,26 +26,25 @@ import org.jfree.data.general.PieDataset;
 
 
 public class PieChart extends JFrame {
-    private static final long serialVersionUID = 6294689542092367723L;
-    ArrayList<Category> categoryList = new ArrayList<Category>();
-    ArrayList<CostItem> items = new ArrayList<CostItem>();
     HashMap<Category, Double> pieChartData = new HashMap();
 
+    /**
+     * PieChart dialog class
+     * @param title Chart title
+     */
     public PieChart(String title) {
         super(title);
-
     }
 
-    public void setCategoryList(ArrayList<Category> categoryList) {
-        this.categoryList = categoryList;
-    }
-
-    public void setItems(ArrayList<CostItem> items) {
-        this.items = items;
-    }
-
+    /**
+     * Set the data of the chart
+     * @param pieChartData a HashMap which links between category and sum for that category
+     */
     public  void setData(HashMap<Category, Double> pieChartData) {this.pieChartData= pieChartData;}
 
+    /**
+     * Make the chart visible in the dialog
+     */
     public void showPieChart(){
         // Create dataset   change
         PieDataset dataset = createDataset();
@@ -68,7 +67,10 @@ public class PieChart extends JFrame {
         setContentPane(panel);
     }
 
-    //change!!!!!!!!!!!!!!!!
+    /**
+     * Build a private dataset for the chart
+     * @return return a PieDataset based on the hashtable
+     */
     private PieDataset createDataset() {
 
 
@@ -79,43 +81,5 @@ public class PieChart extends JFrame {
         }
 
         return dataset;
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            //1
-            PieChart example = new PieChart("hii");
-
-
-            /* 2 -> data*/
-
-            ArrayList<Category> categoryList = new ArrayList<Category>();
-            ArrayList<CostItem> costItems = new ArrayList<CostItem>();
-
-            Category a = new Category("a");
-            Category b = new Category("b");
-            categoryList.add(a);
-            categoryList.add(b);
-            CostItem item = new CostItem("nice1",90, Currency.USD,a);
-            CostItem item2 = new CostItem("nice2",990,Currency.USD,b);
-            CostItem item3 = new CostItem("nice carpet3",990,Currency.USD,a);
-            CostItem item4 = new CostItem("nice carpet4",990,Currency.USD,b);
-            costItems.add(item);
-            costItems.add(item2);
-            costItems.add(item3);
-            costItems.add(item4);
-
-
-            //3 -> set data
-            example.setCategoryList(categoryList);
-            example.setItems(costItems);
-
-            //4 -> show pie chart
-            example.showPieChart();
-            example.setSize(800, 400);
-            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            example.setVisible(true);
-        });
     }
 }

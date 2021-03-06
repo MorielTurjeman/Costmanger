@@ -14,9 +14,7 @@ public class CostItem {
     private Date date;
 
     public CostItem(String description, double sum,Currency currency, Category category, Date date) {
-//        this.description = description;
-//        this.sum = sum;
-//        this.currency = currency;
+
 
         setDescription(description);
         setCurrency(currency);
