@@ -81,6 +81,8 @@ public class View implements IView {
         private  JComboBox day;
         private  JComboBox year;
         private  JButton pieChartRep;
+        private  JTextField sum;
+        private  JLabel sumLable;
 
 
 
@@ -135,7 +137,8 @@ public class View implements IView {
             getReport.addActionListener(l -> this.showReportDialog());
             pieChartRep= new JButton("Pie Chart Report");
             pieChartRep.addActionListener(l->this.showPieChartRepo());
-
+            sum = new JTextField();
+            sumLable= new JLabel("SUM:");
 
 
 
@@ -242,6 +245,9 @@ public class View implements IView {
             panelMessage.add(getReport);
             panelMessage.add(deleteButton);
             panelMessage.add(pieChartRep);
+            panelMessage.add(sumLable);
+            panelMessage.add(sum);
+
 
             deleteButton.setVisible(false);
 
@@ -382,6 +388,11 @@ public class View implements IView {
         public void showItems(Vector <CostItem> items) {
             CostItemTableModel costItemTable= new CostItemTableModel(items);
             table.setModel(costItemTable);
+            double sumItem=0;
+            for (int i=0; i<items.size(); i++){
+                sumItem += items.get(i).getSum();
+            }
+            sum.setText(String.format("%.2f₪", sumItem));
 
         }
 
@@ -409,19 +420,13 @@ public class View implements IView {
             rp.showDialog();
             try {
                 ReportFilters rf = rp.returnReportFilters();
-                vm.getCostItems(rf);
+                if (rf != null)
+                    vm.getCostItems(rf);
             } catch (Exception e) {
                 showMessage(e.getMessage());
             }
 
         }
-
-        public  void addCategory(String categoryName){
-
-
-        }
-
-
 
     }
 

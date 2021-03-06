@@ -28,6 +28,7 @@ public class ReportPopup {
     private  JButton getReport;
     private  JButton getChartPie;
     private JPanel panel;
+    private ReportFilters rf;
 
 
 
@@ -68,13 +69,25 @@ public class ReportPopup {
     }
 
 
-    public ReportFilters returnReportFilters() throws ParseException {
-        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
-        Date from = dateParser.parse(String.format("%d-%2d-%d", startYear.getSelectedItem(), ((Month) startMonth.getSelectedItem()).getValue(), startDay.getSelectedItem()));
-        Date to = dateParser.parse(String.format("%d-%2d-%d", endYear.getSelectedItem(), ((Month)endMonth.getSelectedItem()).getValue(), endDay.getSelectedItem()));
-        Category cat = new Category(categoryList.getSelectedItem().toString());
-        ReportFilters rf = new ReportFilters(from, to, cat);
+    public ReportFilters returnReportFilters()  {
+
         return rf;
+    }
+
+    public void ClosePopup(JDialog dialog) {
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+        Date from = null;
+        try {
+            from = dateParser.parse(String.format("%d-%2d-%d", startYear.getSelectedItem(), ((Month) startMonth.getSelectedItem()).getValue(), startDay.getSelectedItem()));
+            Date to = dateParser.parse(String.format("%d-%2d-%d", endYear.getSelectedItem(), ((Month)endMonth.getSelectedItem()).getValue(), endDay.getSelectedItem()));
+            Category cat = new Category(categoryList.getSelectedItem().toString());
+            rf = new ReportFilters(from, to, cat);
+            dialog.setVisible(false);
+
+        } catch (ParseException e) {
+            //Note: this shouldn't happen anyway since the values are from constant select boxes
+        }
+
     }
 
 
@@ -82,8 +95,9 @@ public class ReportPopup {
     public void showDialog()
     {
         JDialog dialog = new JDialog(fr, "Reports");
-
-
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+//        c.gridx = 0, c.gridy = 0
         dialog.add(panel);
         panel.add(from);
         panel.add(startMonth);
@@ -97,7 +111,9 @@ public class ReportPopup {
         panel.add(categoryList);
         panel.add(getReport);
 
-        getReport.addActionListener(l -> dialog.setVisible(false));
+        getReport.addActionListener(l -> this.ClosePopup(dialog));
+
+        endYear.setSelectedItem(2022);
 
 
         dialog.setModal(true);

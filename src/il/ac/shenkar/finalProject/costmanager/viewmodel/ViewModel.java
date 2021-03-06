@@ -75,7 +75,7 @@ public class ViewModel implements IViewModel {
                 try {
                     res = model.getCategories();
                 } catch (CostManagerException e) {
-                    e.printStackTrace();
+                    view.showMessage(e.getMessage());
                 }
                 view.showCategories(res);
             }

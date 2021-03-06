@@ -1,5 +1,6 @@
 package il.ac.shenkar.finalProject.costmanager;
 
+import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
 import il.ac.shenkar.finalProject.costmanager.model.DerbyDBModel;
 import il.ac.shenkar.finalProject.costmanager.model.IModel;
 import il.ac.shenkar.finalProject.costmanager.view.IView;
@@ -9,7 +10,6 @@ import il.ac.shenkar.finalProject.costmanager.viewmodel.ViewModel;
 
 public class Application {
     public static void main(String args[]) {
-
         //creating the application components
         IModel model = new DerbyDBModel();
         IView view = new View();

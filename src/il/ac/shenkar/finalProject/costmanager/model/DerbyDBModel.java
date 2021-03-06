@@ -20,12 +20,8 @@ public class DerbyDBModel implements IModel {
             }else{
                 System.out.println("row in  product NOT created");
             }
-        } catch (SQLException throwables) {
-            //if(throwables.getSQLState().equals("XJ015")){
-            //    System.out.println("Derby DB shutdown normally");
-            //}else {
-            throwables.printStackTrace();
-            //}
+        } catch (SQLException e) {
+            throw new CostManagerException(e.getMessage());
         }
 
 
@@ -43,9 +39,8 @@ public class DerbyDBModel implements IModel {
         int rows = statement.executeUpdate(sql);
         connection.close();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            throw new CostManagerException(throwables.getMessage());
+        } catch (SQLException e) {
+            throw new CostManagerException(e.getMessage());
         }
     }
     public Vector<Category> getCategories() throws CostManagerException {
@@ -65,8 +60,8 @@ public class DerbyDBModel implements IModel {
                 categories.add(newCategory);
             }
             connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new CostManagerException(e.getMessage());
         }
         return categories;
 
@@ -112,8 +107,8 @@ public class DerbyDBModel implements IModel {
             Vector<CostItem> items = getCostItemsFromDb(set);
             connection.close();
             return items;
-        } catch (SQLException throwables) {
-            throw new CostManagerException(throwables.getMessage());
+        } catch (SQLException e) {
+            throw new CostManagerException(e.getMessage());
         }
 
 
@@ -140,8 +135,8 @@ public class DerbyDBModel implements IModel {
             Vector<CostItem> items = getCostItemsFromDb(set);
             connection.close();
             return items;
-        } catch (SQLException throwables) {
-            throw new CostManagerException(throwables.getMessage());
+        } catch (SQLException e) {
+            throw new CostManagerException(e.getMessage());
         }
 
 
@@ -160,20 +155,15 @@ public class DerbyDBModel implements IModel {
             }else{
                 System.out.println("row in  product NOT removed");
             }
-//            String shotdownURL = "jdbc:derby:;shutdown=true";
-//            DriverManager.getConnection(shotdownURL);
-        } catch (SQLException throwables) {
-            //if(throwables.getSQLState().equals("XJ015")){
-            //    System.out.println("Derby DB shutdown normally");
-            //}else {
-            throwables.printStackTrace();
-            //}
+
+        } catch (SQLException e) {
+            throw new CostManagerException(e.getMessage());
         }
     }
 
 
 
-    public DerbyDBModel(){
+    public DerbyDBModel() {
         String jdbcURL= "jdbc:derby:costManager;create=true";
         try {
             Connection connection = DriverManager.getConnection(jdbcURL);
@@ -186,11 +176,11 @@ public class DerbyDBModel implements IModel {
             connection.close();
 
 
-        } catch (SQLException throwables) {
-            if(throwables.getSQLState().equals("X0Y32")) {
+        } catch (SQLException e) {
+            if(e.getSQLState().equals("X0Y32")) {
                 System.out.println("Table costItem already exists!");
             }else{
-            throwables.printStackTrace();
+                System.out.println("Could not connect to database, exiting application");
             }
         }
 
