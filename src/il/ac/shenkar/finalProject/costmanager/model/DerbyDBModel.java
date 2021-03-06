@@ -5,7 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-public class DerbyDBModel implements IModel {
+public class DerbyDBModel implements IModel
+/**
+ * Our DB for storing the data, such as item name, item cost, currency, etc.
+ * */
+{
     @Override
     public void addCostItem(CostItem item) throws CostManagerException {
         String jdbcURL= "jdbc:derby:costManager;create=true";

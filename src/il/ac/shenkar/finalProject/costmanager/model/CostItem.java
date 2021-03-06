@@ -4,7 +4,10 @@ package il.ac.shenkar.finalProject.costmanager.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CostItem {
+public class CostItem /**
+ This class represents an item that the user inserted, of something which he spent money on.
+ */
+{
 
     private int id;
     private String description;
@@ -37,7 +40,11 @@ public class CostItem {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    /**
+     * Transforms the data into a string.
+     * */
+    {
         return "CostItem{" +
                 " id=" + id +
                 ", date=" +new SimpleDateFormat("yyyy-MM-dd").format(date) +

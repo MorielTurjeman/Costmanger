@@ -52,7 +52,7 @@ public class ViewModel implements IViewModel {
             public void run() {
                 try {
                     model.addCategory(newCategory);
-                    view.showMessage(String.format("Category %s added succesfully", newCategory.getCategory()));
+                    view.showMessage(String.format("Category %s added successfully", newCategory.getCategory()));
                     Vector <Category> items= model.getCategories();
                     view.showCategories(items);
 
@@ -68,7 +68,9 @@ public class ViewModel implements IViewModel {
 
     @Override
     public void getCategories() {
-        pool.submit(new Runnable() {
+
+        pool.submit(new Runnable()
+        {
             @Override
             public void run() {
                 Vector<Category> res= null;
