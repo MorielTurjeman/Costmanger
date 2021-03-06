@@ -1,9 +1,6 @@
 package il.ac.shenkar.finalProject.costmanager.viewmodel;
 
-import il.ac.shenkar.finalProject.costmanager.model.Category;
-import il.ac.shenkar.finalProject.costmanager.model.CostItem;
-import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
-import il.ac.shenkar.finalProject.costmanager.model.IModel;
+import il.ac.shenkar.finalProject.costmanager.model.*;
 import il.ac.shenkar.finalProject.costmanager.view.IView;
 
 import java.util.Vector;
@@ -96,6 +93,25 @@ public class ViewModel implements IViewModel {
                     costItems = model.getCostItems();
                     view.showItems(costItems);
 
+                } catch (CostManagerException e) {
+                    e.printStackTrace();
+                    view.showMessage(e.getMessage());
+                }
+
+            }
+        }));
+
+    }
+
+    @Override
+    public void getCostItems(ReportFilters rf) {
+        pool.submit((new Runnable() {
+            @Override
+            public void run() {
+                Vector <CostItem> costItems= null;
+                try {
+                    costItems = model.getCostItems(rf);
+                    view.showItems(costItems);
                 } catch (CostManagerException e) {
                     e.printStackTrace();
                     view.showMessage(e.getMessage());

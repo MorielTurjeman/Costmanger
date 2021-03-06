@@ -1,15 +1,16 @@
 package il.ac.shenkar.finalProject.costmanager.view;
 
-import il.ac.shenkar.finalProject.costmanager.model.Category;
-import il.ac.shenkar.finalProject.costmanager.model.CostItem;
-import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
-import il.ac.shenkar.finalProject.costmanager.model.Currency;
+import il.ac.shenkar.finalProject.costmanager.model.*;
 import il.ac.shenkar.finalProject.costmanager.viewmodel.IViewModel;
+import org.jfree.data.statistics.SimpleHistogramDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ReportPopup {
     private IViewModel vm;
@@ -35,7 +36,7 @@ public class ReportPopup {
         panel = new JPanel();
         from= new JLabel("From: ");
         to= new JLabel("To: ");
-        getReport= new JButton("Detailed Report");
+        getReport = new JButton("Detailed Report");
         getChartPie= new JButton("Pie Chart Report");
 
 
@@ -65,7 +66,16 @@ public class ReportPopup {
 
         getChartPie.addActionListener(l -> this.showPie());
 
+    }
 
+
+    public ReportFilters returnReportFilters() throws ParseException {
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+        Date from = dateParser.parse(String.format("%d-%2d-%d", startYear.getSelectedItem(), ((Month) startMonth.getSelectedItem()).getValue(), startDay.getSelectedItem()));
+        Date to = dateParser.parse(String.format("%d-%2d-%d", endYear.getSelectedItem(), ((Month)endMonth.getSelectedItem()).getValue(), endDay.getSelectedItem()));
+        Category cat = new Category(categoryList.getSelectedItem().toString());
+        ReportFilters rf = new ReportFilters(from, to, cat);
+        return rf;
     }
 
 
@@ -89,11 +99,13 @@ public class ReportPopup {
         panel.add(getReport);
         panel.add(getChartPie);
 
+        getReport.addActionListener(l -> dialog.setVisible(false));
+
+
         dialog.setModal(true);
 
         dialog.setSize(300,250);
         dialog.setVisible(true);
-
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
 
 

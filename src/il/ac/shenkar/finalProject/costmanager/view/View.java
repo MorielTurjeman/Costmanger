@@ -1,20 +1,18 @@
 package il.ac.shenkar.finalProject.costmanager.view;
 
-import il.ac.shenkar.finalProject.costmanager.model.Category;
-import il.ac.shenkar.finalProject.costmanager.model.CostItem;
-import il.ac.shenkar.finalProject.costmanager.model.CostManagerException;
+import il.ac.shenkar.finalProject.costmanager.model.*;
 import il.ac.shenkar.finalProject.costmanager.model.Currency;
 import il.ac.shenkar.finalProject.costmanager.viewmodel.IViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
 import java.time.Month;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Vector;
+import java.util.*;
 
 public class View implements IView {
 
@@ -82,6 +80,8 @@ public class View implements IView {
         private  JComboBox month;
         private  JComboBox day;
         private  JComboBox year;
+        private  JButton pieChartRep;
+
 
 
 
@@ -133,6 +133,9 @@ public class View implements IView {
             getReport= new JButton("Get Report");
             getReport.setBackground(Color.decode("#05c880"));
             getReport.addActionListener(l -> this.showReportDialog());
+            pieChartRep= new JButton("Pie Chart Report");
+            pieChartRep.addActionListener(l->this.showPieChartRepo());
+
 
 
 
@@ -238,6 +241,8 @@ public class View implements IView {
             panelMessage.add(tfMessage);
             panelMessage.add(getReport);
             panelMessage.add(deleteButton);
+            panelMessage.add(pieChartRep);
+
             deleteButton.setVisible(false);
 
 
@@ -339,6 +344,40 @@ public class View implements IView {
 
         }
 
+        public  void showPieChartRepo(){
+            TableModel data= table.getModel();
+            HashMap<Category, Double> categorySums = new HashMap<>();
+            if (data == null){
+                View.this.showMessage("Table has no data");
+            }
+
+            else{
+
+                for (int i=0; i<data.getRowCount(); i++){
+                    Category cat = (Category) data.getValueAt(i, 2);
+                    if (categorySums.containsKey(cat)){
+                            double currSum=categorySums.get(cat);
+                            currSum+=(Double) data.getValueAt(i, 4);
+                            categorySums.put(cat, currSum);
+                    }
+                    else{
+                        categorySums.put(cat, (Double) data.getValueAt(i, 4));
+                    }
+
+
+                }
+            }
+
+
+            PieChart pieChart= new PieChart("Pie Chart Report:");
+            pieChart.setData(categorySums);
+            pieChart.showPieChart();
+            pieChart.setSize(800, 400);
+            pieChart.setLocationRelativeTo(null);
+            pieChart.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            pieChart.setVisible(true);
+        }
+
         //Show the costItems at the table
         public void showItems(Vector <CostItem> items) {
             CostItemTableModel costItemTable= new CostItemTableModel(items);
@@ -368,6 +407,13 @@ public class View implements IView {
         {
             ReportPopup rp = new ReportPopup();
             rp.showDialog();
+            try {
+                ReportFilters rf = rp.returnReportFilters();
+                vm.getCostItems(rf);
+            } catch (Exception e) {
+                showMessage(e.getMessage());
+            }
+
         }
 
         public  void addCategory(String categoryName){
@@ -375,5 +421,8 @@ public class View implements IView {
 
         }
 
+
+
     }
+
 }

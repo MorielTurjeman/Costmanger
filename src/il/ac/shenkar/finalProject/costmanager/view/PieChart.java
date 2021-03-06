@@ -29,6 +29,7 @@ public class PieChart extends JFrame {
     private static final long serialVersionUID = 6294689542092367723L;
     ArrayList<Category> categoryList = new ArrayList<Category>();
     ArrayList<CostItem> items = new ArrayList<CostItem>();
+    HashMap<Category, Double> pieChartData = new HashMap();
 
     public PieChart(String title) {
         super(title);
@@ -42,6 +43,8 @@ public class PieChart extends JFrame {
     public void setItems(ArrayList<CostItem> items) {
         this.items = items;
     }
+
+    public  void setData(HashMap<Category, Double> pieChartData) {this.pieChartData= pieChartData;}
 
     public void showPieChart(){
         // Create dataset   change
@@ -57,7 +60,7 @@ public class PieChart extends JFrame {
 
         //Format Label
         PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator(
-                "Marks {0} : ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+                " {0} - {1} : ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
         ((PiePlot) chart.getPlot()).setLabelGenerator(labelGenerator);
 
         // Create Panel
@@ -67,31 +70,14 @@ public class PieChart extends JFrame {
 
     //change!!!!!!!!!!!!!!!!
     private PieDataset createDataset() {
-        Map<String, Double> map = new HashMap<String, Double>();
-        for(Category catgory : categoryList){
-            double i=0;
-            String s = catgory.getCategory();
-            for(CostItem item: items){
-                if(s.equals(item.getCategory().getCategory())){
-                    //i++;
-                    i=i+item.getSum();
-                }
-            }
-            map.put(s,i);
-        }
+
 
         DefaultPieDataset dataset=new DefaultPieDataset();
-        for (String c : map.keySet()) {
-            System.out.println("key: " + c + " value: " + map.get(c));
-            dataset.setValue(c, map.get(c));
+        for (Category c : pieChartData.keySet()) {
+
+            dataset.setValue(c.getCategory(), pieChartData.get(c));
         }
-        /*
-        dataset.setValue("80-100", 120);
-        dataset.setValue("60-79", 80);
-        dataset.setValue("40-59", 20);
-        dataset.setValue("20-39", 7);
-        dataset.setValue("0-19", 3);
-         */
+
         return dataset;
     }
 
