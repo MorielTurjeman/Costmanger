@@ -97,28 +97,70 @@ public class ReportPopup {
         JDialog dialog = new JDialog(fr, "Reports");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-//        c.gridx = 0, c.gridy = 0
         dialog.add(panel);
-        panel.add(from);
-        panel.add(startMonth);
-        panel.add(startDay);
-        panel.add(startYear);
-        panel.add(to);
-        panel.add(endMonth);
-        panel.add(endDay);
-        panel.add(endYear);
-        panel.add(categoryLable);
-        panel.add(categoryList);
-        panel.add(getReport);
+        int top = 10;
+        int left = 10;
+        int bottom = 00;
+        int right = 00;
+        c.insets = new Insets(top, left, bottom, right);
+        c.anchor = GridBagConstraints.BASELINE_LEADING;
+
+        c.gridx = 0;
+        c.gridy = 0;
+        panel.add(from,c);
+
+        c.gridx = 1;
+        c.gridy = 0;
+        panel.add(startMonth,c);
+
+        c.gridx = 2;
+        c.gridy = 0;
+        panel.add(startDay,c);
+
+        c.gridx = 3;
+        c.gridy = 0;
+        panel.add(startYear,c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        panel.add(to,c);
+
+        c.gridx = 1;
+        c.gridy = 1;
+        panel.add(endMonth,c);
+
+        c.gridx = 2;
+        c.gridy = 1;
+        panel.add(endDay,c);
+
+        c.gridx = 3;
+        c.gridy = 1;
+        panel.add(endYear,c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        panel.add(categoryLable,c);
+
+        c.gridx = 1;
+        c.gridy = 2;
+        panel.add(categoryList,c);
+
+        c.gridx = 0;
+        c.gridy = 4;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.anchor= GridBagConstraints.CENTER;
+        panel.add(getReport,c);
 
         getReport.addActionListener(l -> this.ClosePopup(dialog));
 
         endYear.setSelectedItem(2022);
+        endMonth.setSelectedItem(Month.DECEMBER);
+        endDay.setSelectedItem(31);
 
 
         dialog.setModal(true);
 
-        dialog.setSize(300,250);
+        dialog.setSize(500,250);
         dialog.setVisible(true);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
 

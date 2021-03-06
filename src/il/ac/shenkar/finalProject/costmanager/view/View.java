@@ -216,6 +216,10 @@ public class View implements IView {
             panelTop.add(year);
             panelTop.add(btAddCostItem);
 
+            month.setSelectedIndex(Calendar.getInstance().get(Calendar.MONTH));
+            year.setSelectedItem(Calendar.getInstance().get(Calendar.YEAR));
+            day.setSelectedItem(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+
             panelTop.add(Box.createHorizontalStrut(10));
 
 
