@@ -166,6 +166,8 @@ public class View implements IView
                     else
                     vm.addCategory(new Category(newCategory));
 
+                    mtf.setText("");
+
                 }
             });
 
@@ -334,6 +336,8 @@ public class View implements IView
                         }
                         CostItem item = new CostItem(description, sum, currency, selectedCategory, selectedDate);
                         vm.addCostItem(item);
+                        tfItemSum.setText("");
+                        tfItemDescription.setText("");
 
 
                     } catch (NumberFormatException ex) {
